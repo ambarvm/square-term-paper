@@ -1,12 +1,14 @@
+%%%% CS553 Cryptography Term Paper TEMPLATE %%%%
+
 %%%% 1. DOCUMENTCLASS %%%%
-\documentclass{transcrypto}
+\documentclass[preprint]{transcrypto}
 %%%% NOTES:
-% - Change "journal=tosc" to "journal=tches" if needed
 % - Change "submission" to "final" for final version
 % - Add "spthm" for LNCS-like theorems
 
 
 %%%% 2. PACKAGES %%%%
+% \usepackage{lipsum} % Example package -- can be removed
 
 
 %%%% 3. AUTHOR, INSTITUTE %%%%
@@ -39,30 +41,33 @@
 
 %%%% 6. ABSTRACT %%%%
 \begin{abstract}
-  In this paper we study the cipher SQUARE and various attacks on it.
+  In this paper we analyse the cipher SQUARE and various attacks on it.
 
+  % \lipsum[8]
 \end{abstract}
 
 
 %%%% 7. PAPER CONTENT %%%%
 \section{Introduction}
 
-% Widely used primitives like the AES~\cite{AES} do not have perfect
-% security, and can be analysed with linear
-% cryptanalysis~\cite{EC:Matsui93}, differential
-% cryptanalysis~\cite{JC:BihSha91}, or differential power
-% analysis~\cite{C:KocJafJun99}.  We show that the One-Time-Pad is
-% unconditionally secure in \autoref{sec:main}.
+Widely used primitives like the AES~\cite{AES} do not have perfect
+security, and can be analysed with linear
+cryptanalysis~\cite{EC:Matsui93}, differential
+cryptanalysis~\cite{JC:BihSha91}, or differential power
+analysis~\cite{C:KocJafJun99}.  We show that the One-Time-Pad is
+unconditionally secure in \autoref{sec:main}.
 
+% \lipsum[9]
 
 \section{Main Result}
 \label{sec:main}
 
+% \lipsum
 
 
 %%%% 8. BILBIOGRAPHY %%%%
-% \bibliographystyle{alpha}
-% \bibliography{abbrev3,crypto,biblio}
+\bibliographystyle{alpha}
+\bibliography{cryptobib/abbrev3,cryptobib/crypto,biblio}
 %%%% NOTES
 % - Download abbrev3.bib and crypto.bib from https://cryptobib.di.ens.fr/
 % - Use bilbio.bib for additional references not in the cryptobib database.
