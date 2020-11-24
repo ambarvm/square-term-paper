@@ -1,0 +1,51 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usetheme{Frankfurt}
+\usecolortheme{crane}
+
+\title{Analysis of SQUARE}  
+\author{\texttt{Code Breakers}} 
+\institute{
+	\includegraphics[scale=0.08]{logoiitbh}
+	
+	Department of \texttt{EECS}\\
+	Indian Institute of Technology Bhilai}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+
+\end{frame}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\input{intro}
+\input{spec}
+\input{observe}
+\input{bpnominate}
+\input{conclu}
+
+
+\begin{frame}{Thanks}
+  \begin{block}{Team Members}
+    \begin{itemize}
+      \item Ambar Mutha
+      \item Ashutosh Sahu
+      \item Priyanka Yadav
+    \end{itemize}
+  \end{block}
+  \begin{block}{Implementation Info}
+    \begin{itemize}
+      \item Github Link: \href{https://github.com/supercoww/square-term-paper}{github.com/supercoww/square-term-paper}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\end{document}
