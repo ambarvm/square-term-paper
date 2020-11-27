@@ -2,6 +2,10 @@
 
 %%%% 1. DOCUMENTCLASS %%%%
 \documentclass[preprint]{transcrypto}
+\documentclass{homeworg}
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \graphicspath{ {../assets/} }
 %%%% NOTES:
 % - Change "submission" to "final" for final version
@@ -49,7 +53,102 @@
 
 
 %%%% 7. PAPER CONTENT %%%%
-\section{Introduction}
+%%%\section{Introduction}
+\begin{document}
+
+\maketitle
+\paragraph{ Introduction of Square Cipher:-\\}
+\\
+Square is an iterated block cipher. Block length is 128 bits and key length also 128 bits. The round transformation of Square is composed of four distinct transformations($\theta$,$\gamma$,$\pi$,$\sigma$). We wil combine these four building blocks in a single set of table-lookups and exor operations. The basic building blocks of the cipher are five different invertible transformations that operate on a 4x4 array of bytes. 
+\paragraph{ Transformation Operations:-}\\
+\paragraph{1.1 A Linear Transformation ($\theta$) :- \\} \\
+$\theta$ is a linear operation. We have state matrix $a$ and $\theta$ operates on each of four rows separately. Expression for $\theta$ operation:- 
+$$
+\theta: b=\theta(a) \Leftrightarrow b_{i, j}=c_{j} a_{i, 0} \oplus c_{j-1} a_{i, 1} \oplus c_{j-2} a_{i, 2} \oplus c_{j-3} a_{i, 3}
+$$
+The element of a state a in row $i$ and column $j$ is specified as $a_{i, j}$ . Both indexes start from $0$.\\
+where, the multiplication is in GF $\left(2^{8}\right)$, which is also called the Galois field and the coefficients of $c$ must be taken modulo $4 .$ Here, addition in the field is exclusive XOR.\\
+$c$ is a 1D array and equivalent to below matrix:-  \\
+                                %  $c$   $\equiv$\\
+                               
+                                $c$   $\equiv$ \begin{bmatrix}
+                                                2 & 1 & 1 & 3\\
+                                                3 & 2 & 1 & 1\\
+                                                1 & 3 & 2 & 1\\
+                                                1 & 1 & 3 & 2\\
+                                                \end{bmatrix}
+                                                
+We can denote every row of a state as a polynomial.like, the polynomial corresponding to row $i$ of a state $a$ is given by
+$$
+a_{i}(x)=a_{i, 0} \oplus a_{i, 1} x \oplus a_{i, 2} x^{2} a_{i, 3} x^{3}
+$$
+Using this notation, and defining $c(x)=\oplus_{j} c_{j} x^{j}$ we can describe $\theta$ as a modular polynomial multiplication:
+$$
+b=\theta(a) \Leftrightarrow b_{i}(x)=c(x) a_{i}(x) \bmod 1 \oplus x^{4} \quad \text { for } \quad 0 \leq i<4
+$$
+The inverse of $\theta$ corresponds to a polynomial $d(x)$ given by
+$$
+d(x) c(x)=1 \quad\left(\bmod 1 \oplus x^{4}\right)
+$$
+\paragraph{1.2 A Nonlinear Transformation ($\gamma$):- \\}\\
+$\gamma$ is a nonlinear byte substitution, identical for all bytes. We have
+$$
+\gamma: b=\gamma(a) \Leftrightarrow b_{i, j}=\mathrm{S}_{\gamma}\left(a_{i, j}\right)
+$$
+Here, $\mathrm{S}$ -box is an invertible 8-bit substitution table. 
+The inverse of $\gamma$ consists of the application of the inverse substitution $\mathrm{S}_{\gamma}^{-1}$ to all bytes of a state.
+
+\paragraph{1.3 A Byte Permutation ($\pi$):-\\}\\
+$\pi$ is a linear operation. It transposes a matrix.
+The effect of $\pi$ is the interchanging of rows and columns of a state. 
+$$
+\pi: b=\pi(a) \Leftrightarrow b_{i, j}=a_{j, i}
+$$
+$\pi$ is an involution,because transpose of transpose of a matrix is matrix itself.\\
+hence $\pi^{-1}=\pi$
+
+\paragraph{1.4 Bitwise Round Key Addition ($\sigma$):- \\}\\
+$\sigma$ is a linear opeartion.\\
+$\sigma\left[k^{t}\right]$ consist of the bitwise addition or $\xor$ of a round key $k^{t} .$ We have
+$$
+\sigma\left[k^{t}\right]: b=\sigma\left[k^{t}\right](a) \Leftrightarrow b=a \oplus k^{t}
+$$
+$\sigma$ is an involution also hence,
+the inverse of $\sigma\left[k^{t}\right]$ is $\sigma\left[k^{t}\right]$ itself.
+\paragraph{The Round Key Evolution ($\psi$):- \\}\\
+The round keys $k^{t}$ are derived from the cipher key $K$. $k^{0}$ equals the cipher key $K$. The other round keys are derived iteratively by means of the invertible affine transformation $\psi$.
+$$
+\psi: k^{t}=\psi\left(k^{t-1}\right)
+$$
+\paragraph{First round :- \\}\\
+There are total eight rounds in SQUARE cipher proceeded by a key addition $\sigma\left[k^{0}\right]$ and by $\theta^{-1}$ .
+All four building blocks are composed into the round transformation. Every round is denoted by $\rho\left[k^{t}\right]$. We are doing just four transformation($\theta$,$\gamma$,$\pi$,$\sigma$) in every round.
+$$
+\rho\left[k^{t}\right]=\sigma\left[k^{t}\right] \circ \pi \circ \gamma \circ \theta
+$$
+The $\theta^{-1}$ before $\sigma\left[k^{0}\right]$ in SQUARE can be incorporated in the first round. We have
+$$
+\begin{aligned}
+\rho\left[k^{1}\right] \circ \sigma\left[k^{0}\right] \circ \theta^{-1}\\ &=\sigma\left[k^{1}\right] \circ \pi \circ \gamma \circ \theta \circ \sigma\left[k^{0}\right] \circ \theta^{-1} \\
+&=\sigma\left[k^{1}\right] \circ \pi \circ \gamma \circ \sigma\left[\theta\left(k^{0}\right)\right]
+\end{aligned}
+$$
+Hence the initial $\theta^{-1}$ can be discarded by omitting $\theta$ in the first round and applying $\theta\left(k^{0}\right)$ instead of $k^{0} .$ 
+Here,$k^{0}$ equals to Cipher key $K$.
+
+SQUARE Cipher after complete eight rounds:-\\
+$$
+\operatorname{SQUARE}[k]=\rho\left[k^{8}\right] \circ \rho\left[k^{7}\right] \circ \rho\left[k^{6}\right] \circ \rho\left[k^{5}\right] \circ \rho\left[k^{4}\right] \circ \rho\left[k^{3}\right] \circ \rho\left[k^{2}\right] \circ \rho\left[k^{1}\right] \circ \sigma\left[k^{0}\right] \circ \theta^{-1}
+$$
+\\
+   \includegraphics[width=0.9\columnwidth]{Square_cipher_diagram}\\
+here, a is initial state matrix ,$k_{0}$ is cipher key, and $k_{1}$,$k_{2}$, .... , $k_{8}$ are round keys derived using key scheduling algorithm.\\
+Only First round is different, but in others same transformation operations are applied in same order.
+
+\end{document}
+
+
+
 
 Widely used primitives like the AES~\cite{AES} do not have perfect
 security, and can be analysed with linear
