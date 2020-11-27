@@ -411,6 +411,7 @@ void visualise_and_attack(bit16 *key)
          }
       }
    }
+   cout << "\n############### Key found after attack ###############\n";
    for(i = 0; i < 4; i++)
    {
       for(j = 0; j < 4; j++)
