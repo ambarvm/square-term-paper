@@ -10,7 +10,7 @@
 
 %%%% 2. PACKAGES %%%%
 % \usepackage{lipsum} % Example package -- can be removed
-
+\usepackage{hyperref}
 
 %%%% 3. AUTHOR, INSTITUTE %%%%
 \author{Ambar Mutha \and Ashutosh Sahu \and Priyanka Yadav}
@@ -37,7 +37,7 @@
 
 
 %%%% 5. KEYWORDS %%%%
-\keywords{SQUARE \and Block cipher}
+\keywords{SQUARE \and Block cipher \and SPN}
 
 
 %%%% 6. ABSTRACT %%%%
@@ -73,7 +73,7 @@ The Difference Distribution Table (DDT) has the highest value 4. Therefore, the 
   \item There are 33,150 zeroes in the DDT. Hence, roughly half of the input/output difference pairs are impossible.
 \end{itemize}
 
-The S-Box for SQUARE is different from that of AES but similar as these three properties are also followed the AES S-Box.
+The S-Box for SQUARE is different from that of AES but similar as these three properties are also followed the AES S-Box. The complete DDT can be seen at the \href{https://github.com/supercoww/square-term-paper/blob/master/code/scripts/ddt.txt}{Github repository}.
 
 % \lipsum
 \section{The Integral Attack}
@@ -141,6 +141,12 @@ The complexity of different variations of the integral attack as in ~\cite{FSE:D
   \label{tab:complexity}
 \end{table}
 
+\section{Other Attacks}
+\subsection{Related Key Boomerang Attack}
+The Related-key boomerang attack ~\cite{EPRINT:KooYeoSon10} is an attack on the full 8 round SQUARE. It extends a 3 round related-key differential using \textit{ladder switch} and \textit{local amplification} techniques to find a 7 round distinguisher with probabilty $2^{-119}$. It can retrieve 16 bits of key using $2^{123}$ data and $2^{36}$ SQUARE encryptions.
+
+\subsection{Biclique Cryptanalysis}
+Biclique Cryptanalysis of the Block Cipher SQUARE ~\cite{EPRINT:Mala11} is an attack on full 8 round SQUARE inspired from the biclique attack on full AES ~\cite{AC:BogKhoRec11}. It has data complexity of $2^{48}$, time complexity of $2^{126}$ SQUARE encryptions and memory complexity $2^{16}$.
 
 %%%% 8. BILBIOGRAPHY %%%%
 \bibliographystyle{alpha}
