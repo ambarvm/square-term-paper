@@ -142,7 +142,13 @@ $$
   \operatorname{SQUARE}[k]=\rho\left[k^{8}\right] \circ \rho\left[k^{7}\right] \circ \rho\left[k^{6}\right] \circ \rho\left[k^{5}\right] \circ \rho\left[k^{4}\right] \circ \rho\left[k^{3}\right] \circ \rho\left[k^{2}\right] \circ \rho\left[k^{1}\right] \circ \sigma\left[k^{0}\right] \circ \theta^{-1}
 $$
 \\
-% \includegraphics[width=0.9\columnwidth]{Square_cipher_diagram}\\
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{Square_cipher_diagram}
+  \caption{SQUARE cipher encryption}
+\end{figure}
+
 here, a is initial state matrix ,$k_{0}$ is cipher key, and $k_{1}$,$k_{2}$, .... , $k_{8}$ are round keys derived using key scheduling algorithm.\\
 Only First round is different, but in others same transformation operations are applied in same order.
 
@@ -212,12 +218,12 @@ The complexity of different variations of the integral attack as in ~\cite{FSE:D
   \centering
   \begin{tabular}{|c|c|c|c|}
     \hline
-    Attack          & Plaintexts & Time  & Memory \\
+    Attack          & Plaintexts & Time     & Memory   \\
     \hline
-    4-round         & $2^9$      & $2^9$ & negl   \\
-    5-round  type 1 & 211        & 240   & negl   \\
-    5-round  type 2 & 232        & 240   & 232    \\
-    6-round         & 232        & 272   & 232    \\
+    4-round         & $2^9$      & $2^9$    & negl     \\
+    5-round  type 1 & $2^{11}$   & $2^{40}$ & negl     \\
+    5-round  type 2 & $2^{32}$   & $2^{40}$ & $2^{32}$ \\
+    6-round         & $2^{32}$   & $2^{72}$ & $2^{32}$ \\
     \hline
   \end{tabular}
 
