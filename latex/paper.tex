@@ -152,6 +152,70 @@ $$
 here, a is initial state matrix ,$k_{0}$ is cipher key, and $k_{1}$,$k_{2}$, .... , $k_{8}$ are round keys derived using key scheduling algorithm.\\
 Only First round is different, but in others same transformation operations are applied in same order.
 
+\subsection{Properties of SQUARE Cipher}
+\paragraph{Inverse Cipher\\}
+Therefore, Square has been designed in such a way that the structure of its inverse is equal to that of the cipher itself, with the exception of the key schedule.
+$$
+\begin{array}{l}
+\text { SQUARE }^{-1}[k]= \\
+\qquad  \theta \circ \sigma\left[k^{0}\right] \circ \rho^{-1}\left[k^{1}\right] \circ \rho^{-1}\left[k^{2}\right] \circ \rho^{-1}\left[k^{3}\right] \circ \rho^{-1}\left[k^{4}\right] \circ \rho^{-1}\left[k^{5}\right] \circ \rho^{-1}\left[k^{6}\right] \circ \rho^{-1}\left[k^{7}\right] \circ \rho^{-1}\left[k^{8}\right]
+% \rho^{-1}\left[k^{8}\right] \circ \rho^{-1}\left[k^{7}\right] \circ \rho^{-1}\left[k^{6}\right] \circ \rho^{-1}\left[k^{5}\right] \circ \rho^{-1}\left[k^{4}\right] \circ \rho^{-1}\left[k^{3}\right] \circ \rho^{-1}\left[k^{2}\right] \circ \rho^{-1}\left[k^{1}\right] \circ \sigma\left[k^{0}\right] \circ \theta
+\end{array}
+
+If we look at each round individually, then it looks like:-\\
+\rho^{-1}\left[k^{t}\right]=\theta^{-1} \circ \gamma^{-1} \circ \pi^{-1} \circ \sigma^{-1}\left[k^{t}\right]=\theta^{-1} \circ \gamma^{-1} \circ \pi \circ \sigma\left[k^{t}\right]
+$$\\
+Since, $\sigma$ is an involution also hence,
+the inverse of $\sigma\left[k^{t}\right]$ is $\sigma\left[k^{t}\right]$ itself.
+Above expression looks like, the structure of the inverse cipher differs substantially from that of the cipher itself. But this is not to be case.\\
+\begin{itemize}
+\item $\pi$ only transposes the bytes $a_{i, j}$ and $\gamma$ only operates on the individual bytes, independent of their position $(i, j),$ we have
+$$
+\gamma^{-1} \circ \pi=\pi \circ \gamma^{-1}
+$$
+hence, \rho^{-1}\left[k^{t}\right]=\theta^{-1} \circ \pi \circ \gamma^{-1} \circ \sigma\left[k^{t}\right]\\
+$
+\item since $\theta^{-1}(a) \oplus k^{t}=\theta^{-1}\left(a+\theta\left(k^{t}\right)\right),$ we have
+$$
+\sigma\left[k^{t}\right] \circ \theta^{-1}=\theta^{-1} \circ \sigma\left[\theta\left(k^{t}\right)\right]
+$$
+Now, round transformation  of Inverse cipher as:-
+$$
+\rho^{\prime}\left[k^{t}\right]=\sigma\left[k^{t}\right] \circ \pi \circ \gamma^{-1} \circ \theta^{-1}
+$$
+Above expression shows the same structure of $\rho{prime}$ as $\rho$ itself, except that $\gamma$ and $\theta$ are replaced by $\gamma^{-1}$ and $\theta^{-1}$ respectively.\\
+$
+\end{itemize}\\
+First round, $\rho{-1}$ is also similar to $\rho{1}$:-
+Using the algebraic properties above, we can derive
+$$
+\begin{aligned}\\
+
+\theta \circ \sigma\left[k^{0}\right] \circ \rho^{-1}\left[k^{1}\right]
+&=\theta \circ \sigma\left[k^{0}\right] \circ \theta^{-1} \circ \gamma^{-1} \circ \pi \circ \sigma\left[k^{1}\right] \\
+
+&=\theta \circ \theta^{-1} \circ \sigma\left[\theta\left(k^{0}\right)\right] \circ \pi \circ \gamma^{-1} \circ \sigma\left[k^{1}\right] \\
+
+&=\sigma\left[\theta\left(k^{0}\right)\right] \circ \pi \circ \gamma^{-1} \circ \sigma\left[k^{1}\right] \\
+
+&=\sigma\left[\theta\left(k^{0}\right)\right] \circ \pi \circ \gamma^{-1} \circ \sigma\left[k^{1}\right] \circ \theta^{-1} \circ \theta \\
+
+&=\sigma\left[\theta\left(k^{0}\right)\right] \circ \pi \circ \gamma^{-1} \circ \theta^{-1} \circ \sigma\left[\theta\left(k^{1}\right)\right] \circ \theta \\
+
+&=\rho^{\prime}\left[\theta\left(k^{0}\right)\right] \circ \sigma\left[\theta\left(k^{1}\right)\right] \circ \theta
+\end{aligned}\\
+Hence the inverse cipher is equal to the cipher itself with $\gamma$ replaced by $\gamma^{-1}$, with $\theta$ by $\theta^{-1}$ and different round key values.
+$$
+\paragraph{Confusion\\}
+Confusion means that each binary digit (bit) of the ciphertext should depend on several parts of the key, obscuring the connections between the two.
+The property of confusion hides the relationship between the ciphertext and the key.\\
+Nonlinear Transformation $\gamma$ adds confusion property in the cipher.
+\paragraph{Diffusion\\}
+Diffusion means that if we change a single bit of the plaintext, then (statistically) half of the bits in the ciphertext should change, and similarly, if we change one bit of the ciphertext, then approximately one half of the plaintext bits should change.
+The idea of diffusion is to hide the relationship between the ciphertext and the plain text.
+In Square Cipher, transformation operations (Linear Transformation $\theta$, Byte Permutation $\pi$ add diffusion property in the cipher.
+\paragraph{Security margin\\}
+Like AES in SQUARE we also have safety rounds. Integral attack was known up to six rounds so to make it secure cipher was extended up to eight rounds. Now, there are total eight rounds so last two rounds are for security purpose of cipher.
 
 \section{Properties}
 \subsection{DDT}
